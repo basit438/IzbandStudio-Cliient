@@ -1,118 +1,166 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 
 const SLIDE_DURATION = 5000;
+const TEXT_DELAY = 500;
 
 const slides = [
   {
     heading: (
       <>
-        Crafted for your brand <br />
-        <span className="text-white/80">strategy-led, data-powered</span>
+        <span className="text-white text-5xl font-semibold font-serif">
+          Future-ready solutions
+        </span>
+        <br />
+        <span className="text-white/60 text-xl tracking-wider">
+          led by innovation
+        </span>
       </>
     ),
-    subtext: 'We shape brands and digital experiences — made today, built for tomorrow.',
-    bgImage:
-      'https://cdn.prod.website-files.com/63f5d378a903c2a12583ce2f/68396ae189a8187a28026e97_mockdsd.avif',
+    sub: 'We blend design, tech and storytelling to fuel your growth.',
+    bg: '/216761_small.mp4',
+    isVideo: true,
   },
   {
     heading: (
       <>
-        Build digital excellence <br />
-        <span className="text-white/80">crafted with precision</span>
+        <span className="bg-gradient-to-r from-white via-white/70 to-white/40 bg-clip-text text-transparent">
+          Crafted for your brand
+        </span>
+        <br />
+        <span className="text-white/80 italic text-xl tracking-wide">
+          strategy‑led, data‑powered
+        </span>
       </>
     ),
-    subtext: 'Turning your offline brand into a powerful online force.',
-    bgImage:
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1470&q=80',
+    sub: 'We shape brands and digital experiences — made today, built for tomorrow.',
+    bg: '/3024112-hd_1920_1080_25fps.mp4', // make sure to place this in your public folder
+    isVideo: true,
   },
   {
     heading: (
       <>
-        Future-ready solutions <br />
-        <span className="text-white/80">led by innovation</span>
+        <span className="bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 bg-clip-text text-transparent">
+          Build digital excellence
+        </span>
+        <br />
+        <span className="text-white/70 italic text-xl tracking-wide">
+          crafted with precision
+        </span>
       </>
     ),
-    subtext: 'We blend design, tech and storytelling to fuel your growth.',
-    bgImage:
-      'https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1470&q=80',
+    sub: 'Turning your offline brand into a powerful online force.',
+    bg: '/3130284-uhd_3840_2160_30fps.mp4',
+    isVideo: true,
   },
+  
+  
 ];
 
-function Hero() {
+export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showText, setShowText] = useState(false);
   const [startProgress, setStartProgress] = useState(false);
 
   useEffect(() => {
-    const initialTimeout = setTimeout(() => setStartProgress(true), 100); // small delay to ensure hydration
-    const slideInterval = setInterval(() => {
-      setStartProgress(false); // reset progress bar fill
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-      setTimeout(() => setStartProgress(true), 50); // restart bar fill after slide change
+    const showTextTimeout = setTimeout(() => {
+      setShowText(true);
+      setStartProgress(true);
+    }, TEXT_DELAY);
+
+    const slideTimer = setInterval(() => {
+      setShowText(false);
+      setStartProgress(false);
+
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }, 100);
+
+      setTimeout(() => {
+        setShowText(true);
+        setStartProgress(true);
+      }, TEXT_DELAY + 200);
     }, SLIDE_DURATION);
 
     return () => {
-      clearInterval(slideInterval);
-      clearTimeout(initialTimeout);
+      clearInterval(slideTimer);
+      clearTimeout(showTextTimeout);
     };
   }, []);
 
   return (
-    <>
-      <section className="relative min-h-screen overflow-hidden">
-        {/* Navbar */}
-        <div className="absolute top-0 left-0 right-0 z-20">
-          <Navbar />
-        </div>
+    <section className="relative min-h-screen overflow-hidden">
+      {/* Navbar */}
+      <div className="absolute top-0 left-0 right-0 z-20">
+        <Navbar />
+      </div>
 
-        {/* Slide Container */}
-        <div
-          className="relative w-full h-screen flex transition-transform duration-700 ease-in-out"
-          style={{
-            transform: `translateX(-${currentSlide * 100}%)`,
-          }}
-        >
-          {slides.map((slide, idx) => (
-            <div
-              key={idx}
-              className="w-full flex-shrink-0 h-screen bg-cover bg-center relative"
-              style={{ backgroundImage: `url(${slide.bgImage})` }}
-            >
-              <div className="absolute inset-0 bg-black/50 z-10" />
-              <div className="relative z-20 h-full flex flex-col items-start justify-center px-6 md:px-20 text-white">
-                <h1 className="text-4xl md:text-6xl font-serif font-medium leading-tight mb-6 max-w-5xl">
-                  {slide.heading}
-                </h1>
-                <p className="text-lg md:text-xl text-white/70 max-w-xl mb-8">{slide.subtext}</p>
-                <a href="#booking">
-                  <button className="bg-green-500 hover:bg-green-600 text-black font-medium px-6 py-3 rounded-full transition-all shadow-lg">
-                    Get a Free Consultation
-                  </button>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Progress Bar */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 w-2/3 max-w-xl z-30">
-          {slides.map((_, idx) => (
-            <div key={idx} className="flex-1 h-1 bg-white/20 overflow-hidden rounded">
+      {/* Slides */}
+      <div
+        className="flex h-screen transition-transform duration-700 ease-in-out"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className="w-full flex-shrink-0 h-screen relative"
+          >
+            {slide.isVideo ? (
+              <video
+                className="absolute inset-0 w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                src={slide.bg}
+              />
+            ) : (
               <div
-                className="h-full bg-green-400"
-                style={{
-                  transition: startProgress && currentSlide === idx ? `width ${SLIDE_DURATION}ms linear` : 'none',
-                  width: currentSlide === idx && startProgress ? '100%' : '0%',
-                }}
-              ></div>
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${slide.bg})` }}
+              />
+            )}
+            <div className="absolute inset-0 bg-black/50 z-10" />
+            <div
+              className={`relative z-20 h-full flex flex-col items-start justify-center px-6 md:px-20 text-white transition-all duration-700 ease-in-out ${
+                showText && currentSlide === index
+                  ? 'opacity-100 translate-x-0'
+                  : 'opacity-0 translate-x-10'
+              }`}
+            >
+              <h1 className="text-4xl md:text-6xl font-serif font-medium leading-tight mb-6 max-w-5xl">
+                {slide.heading}
+              </h1>
+              <p className="text-lg md:text-xl text-white/70 max-w-xl mb-8">{slide.sub}</p>
+              <a href="#booking">
+                <button className="bg-green-500 hover:bg-green-600 text-black font-medium px-6 py-3 rounded-full shadow-lg transition">
+                  Get a Free Consultation
+                </button>
+              </a>
             </div>
-          ))}
-        </div>
-      </section>
-    </>
+          </div>
+        ))}
+      </div>
+
+      {/* Progress Bars */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 w-2/3 max-w-xl z-30">
+        {slides.map((_, i) => (
+          <div key={i} className="flex-1 h-1 bg-white/20 overflow-hidden rounded">
+            <div
+              className="h-full bg-green-400"
+              style={{
+                transition:
+                  currentSlide === i && startProgress
+                    ? `width ${SLIDE_DURATION}ms linear`
+                    : 'none',
+                width: currentSlide === i && startProgress ? '100%' : '0%',
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
-
-export default Hero;
