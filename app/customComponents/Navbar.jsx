@@ -43,10 +43,6 @@ export default function Navbar() {
             <div className="hover:text-pink-600 cursor-pointer">About</div>
             <div className="hover:text-pink-600 cursor-pointer">Work</div>
           </div>
-
-          <button className="mt-4 w-full bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-full text-sm font-semibold">
-            Free Booking
-          </button>
         </div>
       )}
     </nav>
