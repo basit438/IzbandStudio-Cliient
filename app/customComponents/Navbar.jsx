@@ -11,10 +11,10 @@ export default function Navbar() {
     <nav className="w-full fixed top-0 z-50 bg-blended-white shadow-md transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-2xl font-bold text-white">izband</div>
+        <div className="text-2xl font-bold text-shadow-green-200 text-green-500">izband</div>
 
         {/* Desktop Nav Items */}
-        <ul className="hidden md:flex items-center space-x-10 text-[16px] font-medium text-white">
+        <ul className="hidden md:flex items-center space-x-10 text-[16px] font-medium text-shadow-green-200 text-green-500">
           <li className="hover:text-pink-600 cursor-pointer">Services</li>
           <li className="hover:text-pink-600 cursor-pointer">Technologies</li>
           <li className="hover:text-pink-600 cursor-pointer">About</li>
@@ -36,7 +36,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-blend px-6 pb-6 pt-2 space-y-4 border-t border-gray-200">
+        <div className="md:hidden bg-blend px-6 pb-6 pt-2 space-y-4 border-t border-gray-200 text-amber-400">
           <div className="space-y-2 text-white font-medium">
             <div className="hover:text-pink-600 cursor-pointer">Services</div>
             <div className="hover:text-pink-600 cursor-pointer">Technologies</div>
