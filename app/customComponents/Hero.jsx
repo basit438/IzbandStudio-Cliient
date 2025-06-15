@@ -7,7 +7,7 @@ const SLIDE_DURATION = 5000;
 const TEXT_DELAY = 500;
 
 const slides = [
-  {
+    {
     heading: (
       <>
         <span className="text-white text-5xl font-semibold font-serif">
@@ -23,23 +23,7 @@ const slides = [
     bg: '/216761_small.mp4',
     isVideo: true,
   },
-  {
-    heading: (
-      <>
-        <span className="bg-gradient-to-r from-white via-white/70 to-white/40 bg-clip-text text-transparent">
-          Crafted for your brand
-        </span>
-        <br />
-        <span className="text-white/80 italic text-xl tracking-wide">
-          strategy‑led, data‑powered
-        </span>
-      </>
-    ),
-    sub: 'We shape brands and digital experiences — made today, built for tomorrow.',
-    bg: '/3024112-hd_1920_1080_25fps.mp4', // make sure to place this in your public folder
-    isVideo: true,
-  },
-  {
+   {
     heading: (
       <>
         <span className="bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 bg-clip-text text-transparent">
@@ -55,6 +39,23 @@ const slides = [
     bg: '/3130284-uhd_3840_2160_30fps.mp4',
     isVideo: true,
   },
+
+  {
+    heading: (
+      <>
+        <span className="bg-gradient-to-r from-white via-white/70 to-white/40 bg-clip-text text-transparent">
+          Crafted for your brand
+        </span>
+        <br />
+        <span className="text-white/80 italic text-xl tracking-wide">
+          strategy‑led, data‑powered
+        </span>
+      </>
+    ),
+    sub: 'We shape brands and digital experiences — made today, built for tomorrow.',
+    bg: '/3024112-hd_1920_1080_25fps.mp4', // make sure to place this in your public folder
+    isVideo: true,
+  }
   
   
 ];

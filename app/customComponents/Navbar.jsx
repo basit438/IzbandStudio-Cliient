@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
+import Link from 'next/link';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,7 +18,8 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center space-x-10 text-[16px] font-medium text-shadow-green-200 text-green-500">
           <li className="hover:text-pink-600 cursor-pointer">Services</li>
           <li className="hover:text-pink-600 cursor-pointer">Technologies</li>
-          <li className="hover:text-pink-600 cursor-pointer">About</li>
+         
+          <li className="hover:text-pink-600 cursor-pointer"> <Link href="/about">About</Link></li>
           <li className="hover:text-pink-600 cursor-pointer">Work</li>
         </ul>
 
