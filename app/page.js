@@ -5,6 +5,7 @@ import Quote from "./customComponents/Quote";
 
 import ServiceSection from "./customComponents/ServiceSection";
 import TechSection from "./customComponents/TechSection";
+import Footer from "./customComponents/Footer";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
   <Quote/>
   <ServiceSection/>
   <TechSection/>
+  <Footer/>
  
     </>
   );

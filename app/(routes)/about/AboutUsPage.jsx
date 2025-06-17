@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Navbar from '../../customComponents/Navbar';
 
 export default function AboutUsPage() {
   const [isFirstVisible, setIsFirstVisible] = useState(false);
@@ -82,6 +83,7 @@ export default function AboutUsPage() {
 
   return (
     <div>
+      <Navbar />
       {/* First Section - Mission Statement */}
       <section 
         id="mission-section"

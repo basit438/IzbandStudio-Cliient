@@ -1,11 +1,11 @@
 import React from 'react'
-import AboutUsPage from '@/app/customComponents/AboutUsPage'
+import AboutUsPage from './AboutUsPage'
 
 
 function page() {
   return (
    <>
-   <AboutUsPage />
+<AboutUsPage/>
  
    </>
   )
