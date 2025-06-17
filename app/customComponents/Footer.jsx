@@ -117,27 +117,17 @@ const Footer = () => {
               <div className="w-4 h-4 bg-black rounded-sm"></div>
             </div>
             <span className="text-2xl font-light">
-              Fourmeta<sup className="text-xs">®</sup>
+              izband<sup className="text-xs">®</sup>
             </span>
           </div>
 
-          {/* Partners */}
-          <div className="flex gap-6 items-center">
-            {partners.map((partner, index) => (
-              <div key={index} className="bg-gray-900 px-4 py-2 rounded border border-gray-800 hover:border-gray-700 transition-colors">
-                <div className="text-xs text-gray-300">{partner.name}</div>
-                {partner.subtitle && (
-                  <div className="text-xs text-gray-500">{partner.subtitle}</div>
-                )}
-              </div>
-            ))}
-          </div>
+         
         </div>
 
         {/* Copyright */}
         <div className="flex justify-between items-center mt-8 pt-8 border-t border-gray-800">
           <div className="text-xs text-gray-500">
-            © 2025, Fourmeta ltd. UK, London. All rights reserved.<br />
+            © 2025, izband studios ltd. UK, London. All rights reserved.<br />
             Registered in England & Wales No.: 13044361
           </div>
           <div className="flex gap-6 text-xs text-gray-500">
