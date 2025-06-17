@@ -1,6 +1,6 @@
 'use client';
-import ServiceCard from "./ServiceCard";
 import React from "react";
+import ServiceCard from "./ServiceCard";
 
 const services = [
   {
@@ -71,10 +71,24 @@ const services = [
 
 function ServiceSection() {
   return (
-    <div className="relative overflow-hidden bg-[#f4f4f4] h-[90vh] w-full">
+    <div className="relative overflow-hidden bg-[#f4f4f4] 
+      // Mobile: smaller height, better spacing
+      h-[60vh] min-h-[480px]
+      // Tablet: medium height
+      sm:h-[70vh] sm:min-h-[520px]
+      // Desktop: original height
+      md:h-[90vh]
+      w-full">
       <div className="absolute inset-0 group">
-        <div className="flex h-full w-max animate-scroll group-hover:[animation-play-state:paused] gap-10 px-10 items-center">
-          {services.map((card, index) => (
+        <div className="flex h-full w-max animate-scroll group-hover:[animation-play-state:paused] 
+          // Mobile: smaller gaps and padding
+          gap-4 px-4
+          // Tablet: medium spacing
+          sm:gap-6 sm:px-6
+          // Desktop: original spacing
+          md:gap-10 md:px-10
+          items-center">
+          {[...services, ...services].map((card, index) => (
             <div key={index} className="flex-shrink-0">
               <ServiceCard {...card} />
             </div>
