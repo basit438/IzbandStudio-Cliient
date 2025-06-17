@@ -16,11 +16,12 @@ export default function Navbar() {
 
         {/* Desktop Nav Items */}
         <ul className="hidden md:flex items-center space-x-10 text-[16px] font-medium text-shadow-green-200 text-green-500">
+           <li className="hover:text-pink-600 cursor-pointer"> <Link href="/about">About</Link></li>
           <li className="hover:text-pink-600 cursor-pointer"><Link href="/services">Services</Link></li>
           <li className="hover:text-pink-600 cursor-pointer"><Link href="/technologies">Technologies</Link></li>
          
-          <li className="hover:text-pink-600 cursor-pointer"> <Link href="/about">About</Link></li>
-          <li className="hover:text-pink-600 cursor-pointer">Work</li>
+         
+          <li className="hover:text-pink-600 cursor-pointer"><Link href="/work">work</Link></li>
         </ul>
 
         {/* CTA Button - Desktop Only */}
