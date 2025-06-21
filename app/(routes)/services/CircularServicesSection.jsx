@@ -255,124 +255,41 @@ const CircularServicesSection = () => {
     );
   };
 
-  return (
-    <section className="min-h-screen relative overflow-hidden">
-      {/* Blurred Background Image Effect */}
-      {getBackgroundImage()}
-
-      {/* Main Content */}
-      <div ref={containerRef} className="relative z-10 pt-32 pb-32">
-        {/* Title */}
-        <div className="text-center mb-20">
-          <h2 className="text-6xl md:text-7xl font-light text-gray-800 mb-6">
-            Our expertise
-          </h2>
-          <p className="text-gray-700 text-lg mb-4">
-            Explore our services
-          </p>
-          <div className="inline-flex items-center space-x-2 text-sm text-gray-600 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-            <span className="hidden md:inline">Keep scrolling</span>
-            <span className="md:hidden">Swipe to navigate</span>
-            <div className="w-1 h-4 bg-gray-600 rounded-full opacity-60 hidden md:block" />
-            <div className="md:hidden animate-pulse">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
+ return (
+  <section
+    ref={containerRef}
+    className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-gray-900"
+  >
+    {getBackgroundImage()}
+    <div
+      ref={cardsContainerRef}
+      className="relative w-full h-full flex items-center justify-center"
+    >
+      {services.map((service, index) => (
+        <div
+          key={service.id}
+          className={`absolute top-1/2 left-1/2 w-[85%] sm:w-[70%] md:w-[50%] lg:w-[40%] xl:w-[30%] max-w-md transform shadow-xl rounded-2xl p-6 text-white flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${
+            currentIndex === index ? 'scale-105 bg-opacity-90 ring-4 ring-white/10' : ''
+          } ${service.bgColor}`}
+          style={getCardStyle(index)}
+        >
+          <div className="w-full h-40 mb-4 overflow-hidden rounded-xl shadow-md">
+            <Image
+              src={service.image}
+              alt={service.title}
+              width={400}
+              height={300}
+              className="object-cover w-full h-full"
+            />
           </div>
-          
-          {/* Mobile swipe indicator */}
-          <div className="flex justify-center mt-2 md:hidden">
-            <div className="relative w-16 h-6 opacity-70">
-              <div className="absolute left-0 top-1/2 w-3 h-3 bg-gray-400 rounded-full transform -translate-y-1/2 animate-ping" style={{ animationDuration: '1.5s' }} />
-              <div className="absolute right-0 top-1/2 w-3 h-3 bg-gray-400 rounded-full transform -translate-y-1/2 animate-ping" style={{ animationDuration: '1.5s', animationDelay: '0.75s' }} />
-            </div>
-          </div>
+          <h2 className="text-2xl font-bold mb-2 text-center">{service.title}</h2>
+          <p className="text-sm text-center text-white/90">{service.description}</p>
         </div>
+      ))}
+    </div>
+  </section>
+);
 
-        {/* Cards Container */}
-        <div className="relative h-[400px] sm:h-[500px] md:h-[600px] w-full max-w-[90%] sm:max-w-[95%] md:max-w-[1000px] mx-auto mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-8" ref={cardsContainerRef}>
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              className="absolute left-1/2 top-1/2 w-64 sm:w-72 md:w-80 h-72 sm:h-80 md:h-96 transition-all duration-500 ease-out cursor-pointer"
-              style={getCardStyle(index)}
-              onClick={() => setCurrentIndex(index)}
-            >
-              <div className={`w-full h-full rounded-3xl ${service.bgColor} p-4 sm:p-6 md:p-8 shadow-2xl relative overflow-hidden group transform hover:scale-105 transition-transform duration-300`}>
-                {/* Background Image */}
-                <div className="absolute inset-0 opacity-20">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                
-                {/* Content Overlay */}
-                <div className="relative z-10 h-full flex flex-col justify-between">
-                  {/* Number Badge */}
-                  <div className="flex justify-end">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-lg md:text-xl">
-                      {index + 1}
-                    </div>
-                  </div>
-                  
-                  {/* Title and Description */}
-                  <div>
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">{service.title}</h3>
-                    <p className="text-white/80 text-sm sm:text-base md:text-lg mt-2 line-clamp-3">
-                      {service.description}
-                    </p>
-                  </div>
-                  
-                  {/* Learn More Button - Only visible on active card */}
-                  <div className={`mt-4 transition-opacity duration-300 ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}>
-                    <button className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm sm:text-base hover:bg-white/30 transition-colors">
-                      Learn more
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-          </div>
-
-          {/* Mobile Navigation Buttons */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-between px-4 md:hidden">
-          <button 
-            onClick={() => setCurrentIndex(prev => (prev - 1 + services.length) % services.length)}
-            className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button 
-            onClick={() => setCurrentIndex(prev => (prev + 1) % services.length)}
-            className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Progress Indicator */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {services.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${index === currentIndex ? 'bg-blue-600 w-4 sm:w-6' : 'bg-gray-300'}`}
-                aria-label={`Go to service ${index + 1}`}
-              />
-            ))}
-        </div>
-      </div>
-    </section>
-  );
 };
 
 export default CircularServicesSection;
